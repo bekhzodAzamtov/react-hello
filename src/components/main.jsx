@@ -1,5 +1,5 @@
 import React from "react";
-import {userState} from "../../service/UserState";
+import {userState} from "../service/UserState";
 import {UserInfo} from "./user-info";
 
 export class Main extends React.Component {
