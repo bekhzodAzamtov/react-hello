@@ -1,44 +1,41 @@
-import {USER_ACTION_TYPES} from '../actions';
+import {USER_ACTION_TYPES , FETCH_STATUSES} from '../actions';
+import {usersDataBase} from '../action-creators'
+import {usersSelector} from "../selectors";
 
-const defaultUsers = [
-  {id: 1 , name: 'Azamatov' , age: "26"} ,
-  {id: 2 , name: 'Xasanov' , age: "27"} ,
-  {id: 3 , name: 'Jo`rayev' , age: "25"} ,
-]
+const sampleState = {
+  data: [] ,
+  fetchTime: new Date() ,
+  fetchStatus: FETCH_STATUSES.NOT_STARTED ,
+  fetchError: null ,
+  addUser: null ,
+  addStatus: FETCH_STATUSES.NOT_STARTED ,
+  addError: null
+}
 
-export const usersReducers = (state = defaultUsers , action) => {
+export const usersReducers = (state = sampleState , action) => {
   const {type , payload} = action;
-  console.log(type);
+  console.log('state' , state , type);
   switch (type) {
     case USER_ACTION_TYPES.FETCH_USER_LIST: {
-      return [];
+      return {...state , fetchStatus: FETCH_STATUSES.STARTED};
     }
     case USER_ACTION_TYPES.FETCH_USER_LIST_SUCCESS: {
-      return payload;
+      return {...state , data: payload , fetchTime: new Date() , fetchStatus: FETCH_STATUSES.SUCCESS};
     }
     case USER_ACTION_TYPES.FETCH_USER_LIST_FAILED: {
-      return [];
+      return {...state , fetchError: FETCH_STATUSES.ERROR};
     }
+
     case USER_ACTION_TYPES.ADD_USER: {
-      const {user} = payload;
-      return [...state , {...user, pending: true}];
+      return {...state , addStatus: FETCH_STATUSES.STARTED , addUser: payload};
     }
     case USER_ACTION_TYPES.ADD_USER_FAILED: {
-      const {userId} = payload;
-      return state.filter(user => user.id === userId);
+      return {...state , addStatus: FETCH_STATUSES.ERROR , addUser: null};
     }
     case USER_ACTION_TYPES.ADD_USER_SUCCESS: {
-      const {userId} = payload;
-      return state.map(user => {
-        if (user.id !== userId) {
-          return user;
-        }
-        return {
-          ...user,
-          pending: false
-        }
-      });
+      return {...state , addStatus: FETCH_STATUSES.SUCCESS , data: usersSelector().push(payload) , addUser: null};
     }
+
     default:
       return state;
   }

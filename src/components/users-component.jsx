@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {usersSelector} from "../selectors";
 import {fetchUsers , fetchUsersFailed , fetchUsersPromise , fetchUsersSuccess} from "../action-creators";
 import {createSelector} from "reselect";
+import UserManage from "./user-manage";
 
 export class UsersComponent extends Component {
   constructor(props) {
@@ -14,8 +15,8 @@ export class UsersComponent extends Component {
     this.props.getUsersList();
   }
 
-  getTr(user , index) {
-    return (<tr key={index}>
+  static getTr(user , index) {
+    return (<tr key={ index }>
       <td>
         { index }
       </td>
@@ -40,9 +41,10 @@ export class UsersComponent extends Component {
         </tr>
         </thead>
         <tbody>
-        { users.map((user , index) => this.getTr(user , index)) }
+        { users.data.map((user , index) => UsersComponent.getTr(user , index)) }
         </tbody>
       </table>
+      <UserManage/>
     </div>
   }
 }
@@ -61,7 +63,4 @@ export const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps ,
-  mapDispatchToProps
-)(UsersComponent)
+export default connect(mapStateToProps , mapDispatchToProps)(UsersComponent)

@@ -9,18 +9,4 @@ export const root = combineReducers({
   selectedUserId
 });
 
-const FETCH_STATUSES = {
-  NOT_STARTED: 'NOT_STARTED',
-  STARTED: 'STARTED',
-  SUCCESS: 'SUCCESS',
-  ERROR: 'ERROR',
-}
 
-const sampleState = {
-  users: {
-    data: [],
-    fetchTime: new Date(2018,4,4),
-    fetchStatus: FETCH_STATUSES.NOT_STARTED,
-    fetchError: null
-  }
-}
