@@ -5,7 +5,6 @@ import {UserInfo} from "./user-info";
 export class Main extends React.Component {
 
   constructor(props) {
-    console.log(props);
     super();
     this.props = props
     this.state = userState;
@@ -21,18 +20,13 @@ export class Main extends React.Component {
         <input type="text" text="Username"/>
       )
     let users = '';
-    console.log(UserInfo);
-
     userState.getList()
       .forEach(user => {
-        console.log(user);
         users +=
           <div>
             <UserInfo user={ user }/>
           </div>
       });
-    console.log(users);
-
     return inputForm;
   }
 }

@@ -7,7 +7,6 @@ import {createSelector} from "reselect";
 export class UserManage extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {value: {name: '' , age: ''}};
   }
 
@@ -28,7 +27,6 @@ export class UserManage extends Component {
   }
 
   handleSubmit = (event) => {
-    console.log(this.state.value);
     this.props.addUser(this.state.value);
     event.preventDefault();
   }
@@ -49,6 +47,7 @@ export const mapStateToProps = createSelector(
 
 export const mapDispatchToProps = dispatch => ({
   addUser: (user) => {
+    console.log('dispatch');
     dispatch(addUser(user));
     saveUserPromise(user)
       .then(user => dispatch(addUsersSuccess(user)))

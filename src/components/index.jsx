@@ -1,20 +1,19 @@
 import React from "react";
-import UsersComponent from "./users-component";
 import Provider from "react-redux/es/components/Provider";
 import {store} from "../store";
+import {Headers} from "./header";
+import Content from "./content";
 
 export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul>
-          <li>Users</li>
-          <Provider store={ store }>
-            <UsersComponent/>
-          </Provider>
-        </ul>
-      </div>
+      <Provider store={ store }>
+        <div>
+          <Headers/>
+          <Content/>
+        </div>
+      </Provider>
     );
   }
 }

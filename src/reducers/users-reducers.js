@@ -14,7 +14,6 @@ const sampleState = {
 
 export const usersReducers = (state = sampleState , action) => {
   const {type , payload} = action;
-  console.log('state' , state , type);
   switch (type) {
     case USER_ACTION_TYPES.FETCH_USER_LIST: {
       return {...state , fetchStatus: FETCH_STATUSES.STARTED};

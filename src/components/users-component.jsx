@@ -56,6 +56,7 @@ export const mapStateToProps = createSelector(
 
 export const mapDispatchToProps = dispatch => ({
   getUsersList: () => {
+    console.log('dispatch');
     dispatch(fetchUsers())
     fetchUsersPromise()
       .then(users => dispatch(fetchUsersSuccess(users)))

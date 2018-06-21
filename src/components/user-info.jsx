@@ -8,7 +8,7 @@ export class UserInfo extends React.Component {
 
   render() {
     console.log('wetda' , this.props);
-    return <di
+    return <div>
       <h1>
         Username: { this.props.user.name },
       </h1>
